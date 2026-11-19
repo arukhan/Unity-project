@@ -66,19 +66,10 @@ void DrawCharacter(Texture2D sprite, Vector2 position, float maxWidth, float max
     void DrawWorld()
     {
         Rect map=new Rect(18,20,950,660);
-        RectFill(map,new Color(.24f,.29f,.26f));
-        for(int x=0;x<16;x++)for(int y=0;y<10;y++) {
-            Rect r=World(x+.02f,y+.02f,.96f,.96f,map);
-            Color baseFloor = level==1 ? new Color(.55f,.63f,.64f) : level==2 ? new Color(.48f,.52f,.57f) : new Color(.60f,.55f,.42f);
-            RectFill(r,baseFloor*((x+y)%2==0?1f:.93f));
-            if(level==1 && (x==5 || x==10) && y>1 && y<9) RectFill(World(x+.03f,y+.03f,.06f,.94f,map),new Color(.70f,.75f,.75f));
-        }
-        foreach(var r in obstacles){RectFill(World(r.x,r.y,r.width,r.height,map),new Color(.23f,.24f,.26f));RectFill(World(r.x+.12f,r.y+.12f,r.width-.24f,r.height-.24f,map),new Color(.41f,.42f,.40f));}
-        RectFill(World(13.1f,7.65f,2,1.8f,map),new Color(.15f,.55f,.29f));
-        Text(World(13.2f,8.2f,1.8f,.5f,map),"SAFE",small);
+        DrawLocation(map);
         foreach(var c in crates)
         {
-            Rect r=World(c.pos.x-.54f,c.pos.y-.52f,1.08f,1.08f,map);
+            Rect r=World(c.pos.x-.43f,c.pos.y-.42f,.86f,.86f,map);
             Texture2D boxTexture=frames.Box(c.opened);
             if(boxTexture!=null)GUI.DrawTexture(r,boxTexture,ScaleMode.ScaleToFit,true);
             else RectFill(r,new Color(.5f,.3f,.15f));
