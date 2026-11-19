@@ -12,16 +12,9 @@ public partial class PatrolGame : MonoBehaviour
         level = next; mode = Mode.Playing; player = start; stamina = 100; opening = 0; selectedCrate = -1; ammo = 12; kills=0; shootTimer=0; spawnClock=0; nextSpawnDelay = UnityEngine.Random.Range(5f, 7f);; facing=Vector2.down; isMoving=false;
         Array.Clear(collected, 0, collected.Length); crates.Clear(); zombies.Clear(); obstacles.Clear();
 
-        if (level==1) {
-            obstacles.Add(new Rect(3,2.7f,1.2f,2.3f)); obstacles.Add(new Rect(7,6.1f,2.3f,1));
-            obstacles.Add(new Rect(11.5f,2.7f,1.1f,2.2f)); obstacles.Add(new Rect(5,8,2,1));
-        } else if(level==2) {
-            obstacles.Add(new Rect(3.1f,3,1.2f,3)); obstacles.Add(new Rect(6.7f,5.7f,2.6f,1.2f));
-            obstacles.Add(new Rect(11.6f,3,1.4f,2.4f)); obstacles.Add(new Rect(4.7f,8,2.1f,1));
-        } else {
-            obstacles.Add(new Rect(3,3.2f,1.1f,3.4f)); obstacles.Add(new Rect(6,3.2f,1.1f,3.4f));
-            obstacles.Add(new Rect(9,3.2f,1.1f,3.4f)); obstacles.Add(new Rect(12,3.2f,1.1f,3.4f));
-        }
+        location = LocationMap.Create(level);
+        obstacles.AddRange(location.collisions);
+        boxSearchCount = 0;
         var rng = new System.Random(level * 911 + 7);
         var pool = new List<int>();
         for (int i = 0; i < itemNames.Length; i++) for (int j = 0; j < requirements[level-1][i]; j++) pool.Add(i);
@@ -70,7 +63,7 @@ public partial class PatrolGame : MonoBehaviour
             }
             if(!any)break;
         }
-        for(int i=0;i<level+1;i++) { Vector2 p=new Vector2(5+i*3, 4+(i%2)*2); if (!Blocked(p,ZombieRadius)) zombies.Add(new Zombie {pos=p,anchor=p,phase=i*1.7f,facing=Vector2.down,wanderAngle=i*1.8f}); }
+        SpawnInitialZombies();
         Say("Search crates, avoid zombies, deliver supplies to SAFE!");
     }
 

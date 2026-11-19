@@ -7,6 +7,20 @@ using UnityEngine.InputSystem;
 
 public partial class PatrolGame : MonoBehaviour
 {
+    void SpawnInitialZombies()
+    {
+        zombies.Clear();
+        // Choose free positions from the actual layout, including after being caught.
+        for(float y=4;y<=8.5f && zombies.Count<level+1;y+=1.5f)
+            for(float x=5;x<=13.5f && zombies.Count<level+1;x+=2.5f)
+            {
+                var p=new Vector2(x,y);
+                if(Blocked(p,ZombieRadius)||Vector2.Distance(p,start)<3.5f)continue;
+                int i=zombies.Count;
+                zombies.Add(new Zombie {pos=p,anchor=p,waypoint=p,phase=i*1.7f,
+                    facing=Vector2.down,wanderAngle=i*1.8f});
+            }
+    }
 
     void SpawnZombieAtEdge()
     {

@@ -113,32 +113,7 @@ void Caught()
         c.opened = false;
 
 
-    zombies.Clear();
-
-
-    for (int i = 0; i < level + 1; i++)
-    {
-        Vector2 p = new Vector2(5f + i * 3f, 4f + (i % 2) * 2f);
-        if (!Blocked(p, ZombieRadius))
-        {
-            zombies.Add(new Zombie
-            {
-                pos = p,
-                anchor = p,
-                facing = Vector2.down,
-                phase = i * 1.7f,
-                wanderAngle = i * 1.8f,
-                hp = 2,
-                dead = false,
-                waypoint = p,
-                pathClock = 0f,
-                animClock = 0f,
-                attackClock = 0f,
-                hurtClock = 0f,
-                deathClock = 0f
-            });
-        }
-    }
+    SpawnInitialZombies();
 
     spawnClock = 0f;
     nextSpawnDelay = UnityEngine.Random.Range(5f, 7f);
