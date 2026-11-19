@@ -13,7 +13,7 @@ public partial class PatrolGame : MonoBehaviour
         if (spawnClock >= nextSpawnDelay)
         {
             spawnClock = 0f;
-            nextSpawnDelay = UnityEngine.Random.Range(5f, 7f);
+            nextSpawnDelay = 10f;
             SpawnZombieAtEdge();
         }
         for (int i = zombies.Count - 1; i >= 0; i--)

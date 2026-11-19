@@ -9,7 +9,7 @@ public partial class PatrolGame : MonoBehaviour
 {
     void StartLevel(int next)
     {
-        level = next; mode = Mode.Playing; player = start; stamina = 100; opening = 0; selectedCrate = -1; ammo = 12; kills=0; shootTimer=0; spawnClock=0; nextSpawnDelay = UnityEngine.Random.Range(5f, 7f);; facing=Vector2.down; isMoving=false;
+        level = next; mode = Mode.Playing; player = start; stamina = 100; opening = 0; selectedCrate = -1; ammo = 12; kills=0; shootTimer=0; spawnClock=0; nextSpawnDelay = 10f; facing=Vector2.down; isMoving=false;
         Array.Clear(collected, 0, collected.Length); crates.Clear(); zombies.Clear(); obstacles.Clear();
 
         location = LocationMap.Create(level);

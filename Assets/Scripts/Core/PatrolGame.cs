@@ -116,7 +116,7 @@ void Caught()
     SpawnInitialZombies();
 
     spawnClock = 0f;
-    nextSpawnDelay = UnityEngine.Random.Range(5f, 7f);
+    nextSpawnDelay = 10f;
     Say("Caught! Zombies reset. Supplies lost. Ammo restored.");
 }
 
